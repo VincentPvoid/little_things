@@ -1,0 +1,131 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+  <meta charset="UTF-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>svg_mask</title>
+  <style>
+    body,
+    html {
+      position: fixed;
+      width: 100%;
+      height: 100%;
+      margin: 0;
+    }
+
+    .front-img {
+      width: 100%;
+      height: 100%;
+      z-index: 10;
+      background: url('../imgs/BG001.jpg') no-repeat center;
+      background-size: cover;
+    }
+
+    .bg-mask-img {
+      position: absolute;
+      top: 0;
+      bottom: 0;
+      left: 0;
+      right: 0;
+      width: 100%;
+      height: 100%;
+    }
+  </style>
+</head>
+
+<body>
+  <!-- 主体图片区 -->
+  <div class="front-img"></div>
+
+  <!-- 遮罩区 -->
+  <div class="bg-mask-img">
+    <svg width="100%" height="100%">
+      <defs>
+        <!-- 径向渐变效果 -->
+        <radialGradient id="radial" fx="50%" fy="50%" cx="50%" cy="50%" r="50%">
+          <stop offset="0%" stop-color="#fff" stop-opacity="1" />
+          <stop offset="100%" stop-color="#000" stop-opacity="1" />
+        </radialGradient>
+
+        <!-- 高斯模糊效果 -->
+        <filter id="filter-blur">
+          <feGaussianBlur stdDeviation="5" in="SourceGraphic" color-interpolation-filters="sRGB"></feGaussianBlur>
+        </filter>
+      </defs>
+      <!-- 圆形遮罩 -->
+      <mask class="mask1" id="mask_circle">
+        <circle cx="0" cy="0" r="150" fill="url(#radial)" filter="url(#filter-blur)" />
+      </mask>
+      <!-- 背景图 -->
+      <image xlink:href="../imgs/BG002.jpg" mask="url(#mask_circle)" opacity=".8" class="bg-mask"
+        preserveAspectRatio="none meet" />
+    </svg>
+  </div>
+
+  <script>
+    // 鼠标长按计时器 
+    let mouseTimer = null
+    // 遮罩计时器
+    let maskTimer = null;
+
+    // 遮罩层跟随鼠标移动
+    document.body.addEventListener('mousemove', function (event) {
+      // console.log(event);
+      let posX = event.clientX;
+      let posY = event.clientY;
+
+      let mask = document.querySelector('#mask_circle circle');
+      // console.log('x', posX, 'y', posY)
+      // let time = (posX - mask.getAttribute('cx')) > 500 ? 200 : 300;
+      setTimeout(() => {
+        mask.setAttribute('cx', posX);
+        mask.setAttribute('cy', posY)
+      }, 300)
+    })
+
+    // 长按遮罩动态效果
+    document.body.addEventListener('mousedown', function () {
+      let time1 = Date.now();
+      // 根据时间间隔判断是否为长按
+      mouseTimer = setInterval(function () {
+        let time2 = Date.now();
+        if (time2 - time1 > 700) {
+          clearInterval(mouseTimer);
+
+          // 遮罩半径扩散
+          let mask = document.querySelector('#mask_circle circle');
+          maskTimer = setInterval(() => {
+            let r = +mask.getAttribute('r');
+            r = r > 500 ? r + 60 : r + 20;
+            // r += 20;
+            mask.setAttribute('r', r);
+            if (r >= document.body.clientWidth) {
+              clearInterval(maskTimer);
+            }
+          }, 30)
+        }
+      }, 100)
+    })
+    document.body.addEventListener('mouseup', function () {
+      clearInterval(mouseTimer);
+      clearInterval(maskTimer);
+      // 遮罩半径收缩
+      let mask = document.querySelector('#mask_circle circle');
+      maskTimer = setInterval(() => {
+        let r = +mask.getAttribute('r');
+        r = r < 600 ? r - 20 : r - 30;
+        // r -= 20;
+        r = r > 150 ? r : 150
+        mask.setAttribute('r', r);
+        if (r <= 150) {
+          clearInterval(maskTimer);
+        }
+      }, 20)
+    })
+  </script>
+
+</body>
+
+</html>
