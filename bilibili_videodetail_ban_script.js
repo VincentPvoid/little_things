@@ -11,6 +11,9 @@
 (function () {
   'use strict';
   let banList = [{ name: '用户名；其实没有用到，可以不输入', id: '用户UID，用于筛选屏蔽' }]
+
+  let banKeywordsList = ['需要屏蔽的关键词']
+
   let as = document.querySelectorAll('#reco_list .video-page-card .up a')
   for (let i = 0; i < as.length; i++) {
     let tar = null;
@@ -25,6 +28,63 @@
       }
     })
   }
+
+  // setInterval(() => {
+  //   let titleAs = document.querySelectorAll('#reco_list .video-page-card .info>a')
+  //   let temp = null;
+  //   titleAs = [].slice.call(titleAs)
+  //   if (banKeywordsList.length) {
+  //     let tarArr = [];
+  //     let tempSpan = null;
+  //     let tar = null;
+  //     for (let i = 0; i < titleAs.length; i++) {
+  //       tar = banKeywordsList.find(item => {
+  //         tempSpan = titleAs[i].querySelector('span');
+  //         if (tempSpan && tempSpan.title && tempSpan.title.toLowerCase().includes(item)) {
+  //           return true;
+  //         }
+  //       })
+  //       if (tar) {
+  //         tarArr.push(titleAs[i])
+  //       }
+  //     }
+  //     tarArr.forEach(item => {
+  //       temp = item.parentElement.parentElement.parentElement;
+  //       temp.style.display = 'none';
+  //       // item.parentElement.parentElement.parentElement.parentElement.removeChild(temp);
+  //     })
+  //     // console.log(tarArr,'bbbbbbbbbbbb')
+  //   }
+  // }, 300);
+
+
+  let titleAs = document.querySelectorAll('#reco_list .video-page-card .info>a')
+  let temp = null;
+  titleAs = [].slice.call(titleAs)
+  if (banKeywordsList.length) {
+    let tarArr = [];
+    let tempSpan = null;
+    let tar = null;
+    for (let i = 0; i < titleAs.length; i++) {
+      tar = banKeywordsList.find(item => {
+        tempSpan = titleAs[i].querySelector('span');
+        if (tempSpan && tempSpan.title && tempSpan.title.toLowerCase().includes(item)) {
+          return true;
+        }
+      })
+      if (tar) {
+        tarArr.push(titleAs[i])
+      }
+    }
+    tarArr.forEach(item => {
+      temp = item.parentElement.parentElement.parentElement;
+      temp.style.display = 'none';
+      // item.parentElement.parentElement.parentElement.parentElement.removeChild(temp);
+    })
+    // console.log(tarArr,'bbbbbbbbbbbb')
+  }
+
+
 
   const listCon = document.querySelector('.rec-list');
   const config = {
@@ -54,9 +114,15 @@
             //   loadObserver.disconnect();
             //   //过滤操作
             // }
+            // 过滤up
             let tar = addedNodes[0].querySelector('.up a');
             if (tar) {
               handleFilter(tar)
+            }
+            // 过滤标题关键词
+            tar = addedNodes[0].querySelector('.info>a');
+            if(tar){
+              handleKwFilter(tar)
             }
           }
           break;
@@ -69,7 +135,7 @@
   // 以上述配置开始观察目标节点
   observer.observe(listCon, config);
 
-  // 元素增加时进行过滤
+  // 元素增加时进行up主过滤
   function handleFilter(eleA) {
     banList.forEach(item => {
       let tar = null;
@@ -80,6 +146,18 @@
         tar = eleA.parentElement.parentElement.parentElement.parentElement;
         tar.style.display = 'none';
         // tar.parentElement.removeChild(tar)
+      }
+    })
+  }
+  
+  // 元素增加时进行标题关键词过滤
+  function handleKwFilter(eleA) {
+    let tempSpan = eleA.querySelector('span')
+    banKeywordsList.forEach(item => {
+      let tar = null;
+      if (tempSpan && tempSpan.title && tempSpan.title.toLowerCase().includes(item)) {
+        tar = eleA.parentElement.parentElement.parentElement;
+        tar.style.display = 'none';
       }
     })
   }
