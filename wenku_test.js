@@ -19,7 +19,9 @@
     // 测试文字按钮，点击进行跨域请求
     let testDiv = document.createElement('div');
     testDiv.setAttribute('id', 'vpv_wenku_test_btn')
-    testDiv.innerHTML = '<button style="display:fixed;top:0;left:0;z-index:99999;">测试</button>'
+    testDiv.innerHTML = '<button>测试</button>'
+
+    testDiv.style = "position:fixed;top:0;left:0;z-index:99999;"
 
     testDiv.addEventListener('click', async () => {
       // 对应请求页面数组放在pageData.readerInfo.htmlUrls.json这个数组每一个对象的pageLoadUrl中
