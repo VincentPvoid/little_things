@@ -19,6 +19,7 @@
     // console.log(btnLike.classList.toString())
     let like = btnLike.classList.toString().includes('on') ? 2 : 1;
     const url = 'https://api.bilibili.com/x/web-interface/archive/like';
+    // 获取cookie字符串
     const cookieObj = getCookieObj(document.cookie)
     // console.log(unsafeWindow.__INITIAL_STATE__.aid)
 
