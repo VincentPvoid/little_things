@@ -52,11 +52,11 @@ facebook自动滚动到相册底部继续加载的简单脚本，可点击开始
 加载多了之后速度会变慢，也是随便写的随便用一下
 
 ## bilibili_videodetail_toggle_like.js
-之前不知为什么我B站旧版播放页点不了赞，似乎其他人也没这问题  
-新版播放页就没这问题，看了一下旧版播放页好像没发请求也没用到点赞的接口，所以就自己写了个发请求的脚本恢复点赞功能  
+之前不知为什么我B站旧版播放页点不了赞，似乎其他人没这问题  
+新版播放页就可以，看了一下旧版播放页好像没发请求也没用到点赞的接口，所以就自己写了个发请求的脚本恢复点赞功能  
 但刚写好点赞功能就恢复了OTZ  
 脚本和官方功能一起使用会有bug，也就是说现在点赞没问题的情况下这个脚本完全没用  
 不过也算是踩点坑学习一下吧  
 - 在@grant不为none，开启了sandbox的情况下，需要使用unsafeWindow来获取全局变量，如果没使用@grant则可以直接使用window获取全局变量  
 - 可使用document.cookie获取cookie字符串，如果需要其中的特定值则需要进行处理  
-- tampermonkey自带的GM_xmlhttpRequest函数，发送POST请求时，data需要转换为 key=value 的字符串形式发送；
+- tampermonkey自带的GM_xmlhttpRequest函数，发送POST请求时，data需要转换为 key=value 的字符串形式发送
