@@ -14,12 +14,13 @@
   let btnLike = document.querySelector('.like');
   // 记录未操作之前的点赞数字
   // let likeNum = parseInt(btnLike.textContent); // 过万会有问题
+  // 所以使用title中的数字数据，前面有非数字，需要进行正则过滤
   let likeNum = btnLike.title.replace(/[^0-9]+/g, '') * 1; 
   btnLike.addEventListener('click', () => {
     // console.log(btnLike.classList.toString())
     let like = btnLike.classList.toString().includes('on') ? 2 : 1;
     const url = 'https://api.bilibili.com/x/web-interface/archive/like';
-    // 获取cookie字符串
+    // 获取cookie字符串并转换为对象，方便提取特定数据
     const cookieObj = getCookieObj(document.cookie)
     // console.log(unsafeWindow.__INITIAL_STATE__.aid)
 
