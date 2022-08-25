@@ -59,4 +59,5 @@ facebook自动滚动到相册底部继续加载的简单脚本，可点击开始
 不过也算是踩点坑学习一下吧  
 - 在@grant不为none，开启了sandbox的情况下，需要使用unsafeWindow来获取全局变量，如果没使用@grant则可以直接使用window获取全局变量  
 - 可使用document.cookie获取cookie字符串，如果需要其中的特定值则需要进行处理  
-- tampermonkey自带的GM_xmlhttpRequest函数，发送POST请求时，data需要转换为 key=value 的字符串形式发送
+- tampermonkey自带的GM_xmlhttpRequest函数，发送POST请求时，data需要转换为 key=value 的字符串形式发送  
+- 使用GM_xmlhttpRequest函数发送的请求无法直接在页面的控制台network中看到，需要在扩展页面的tampermonkey中，打开背景视图的独立窗口，才能在该窗口的控制台network中看到请求
