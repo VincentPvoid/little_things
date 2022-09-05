@@ -61,3 +61,8 @@ facebook自动滚动到相册底部继续加载的简单脚本，可点击开始
 - 可使用document.cookie获取cookie字符串，如果需要其中的特定值则需要进行处理  
 - tampermonkey自带的GM_xmlhttpRequest函数，发送POST请求时，data需要转换为 key=value 的字符串形式发送  
 - 使用GM_xmlhttpRequest函数发送的请求无法直接在页面的控制台network中看到，需要在扩展页面的tampermonkey中，打开背景视图的独立窗口，才能在该窗口的控制台network中看到请求
+
+## zhihu_remove_watermark.js  
+知乎去水印  
+水印加的挺简单的所以就随便写了个脚本去了一下，不过在现在这个时间点水印已经没了  
+不知是不是要改成更隐蔽的水印，到时再看下吧  
