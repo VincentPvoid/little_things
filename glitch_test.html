@@ -130,12 +130,12 @@
     }
 
     /* 小图 */
-    .small-img{
-      position:fixed;
-      bottom:0;
-      right:0;
-      z-index:20;
-      width:466px;
+    .small-img {
+      position: fixed;
+      bottom: 0;
+      right: 0;
+      z-index: 20;
+      width: 466px;
       animation: flicker 2s linear infinite;
     }
 
@@ -693,28 +693,59 @@
         -ms-filter: "progid:DXImageTransform.Microsoft.Alpha(Opacity=100)";
       }
     }
+
+    .container .add-mix-blend-mode {
+      position: fixed;
+      z-index: 999;
+      width: 60px;
+      height: 60px;
+      background: #fff;
+      border-radius: 50%;
+      transform: translate(-50%, -50%);
+      /* 图片混合模式 */
+      mix-blend-mode: difference;
+    }
   </style>
 </head>
 
 <body>
-  <!-- 大图 -->
-  <div class="main-img">
-    <div class="glitch"></div>
-    <div class="glitch"></div>
-    <div class="glitch"></div>
-    <div class="glitch"></div>
-    <div class="glitch"></div>
+  <div class="container">
+    <!-- 跟随鼠标圆形遮罩 -->
+    <div class="mask add-mix-blend-mode"></div>
+
+    <!-- 大图 -->
+    <div class="main-img">
+      <div class="glitch"></div>
+      <div class="glitch"></div>
+      <div class="glitch"></div>
+      <div class="glitch"></div>
+      <div class="glitch"></div>
+    </div>
+
+    <!-- 竖长图 -->
+    <div class="long-img-wrapper">
+      <div class="long-img"></div>
+    </div>
+
+    <!-- 小图 -->
+    <div class="small-img">
+      <img src="../imgs/DM_ttl_character.png" alt="">
+    </div>
   </div>
 
-  <!-- 竖长图 -->
-  <div class="long-img-wrapper">
-    <div class="long-img"></div>
-  </div>
+  <script>
+    let con = document.querySelector('.container');
+    let mask = document.querySelector('.mask');
+    con.addEventListener('mousemove', (e) => {
+      setTimeout(() => {
+        mask.style.left = e.clientX + 'px';
+        mask.style.top = e.clientY + 'px';
+      }, 200)
+    })
 
-  <!-- 小图 -->
-  <div class="small-img">
-    <img src="../imgs/DM_ttl_character.png" alt="">
-  </div>
+
+
+  </script>
 
 </body>
 
