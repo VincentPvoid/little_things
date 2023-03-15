@@ -1,9 +1,12 @@
 // ==UserScript==
-// @name         facebook自动滚动底部加载
-// @namespace    http://tampermonkey.net/
+// @name         自动滚动底部加载
 // @version      0.1
 // @author       You
 // @match        https://www.facebook.com/*/photos*
+// @match        https://weibo.com/*
+// @match        https://www.instagram.com/*
+// @match        https://vk.com/*
+// @match        https://twitter.com/*
 // @grant        none
 // ==/UserScript==
 
