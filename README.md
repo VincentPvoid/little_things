@@ -47,10 +47,11 @@ glitch效果动画，主要靠keyframes的动画效果，顺便记录一下
 ## vk_clear_modal.js
 在vk相册找图整天弹登录框所以随便写个简单脚本移除一下
 
-## fb_album_scroll_bottom.js
+## auto_scroll_bottom.js
 facebook自动滚动到相册底部继续加载的简单脚本，可点击开始/停止  
 还是不能后台加载，但至少可以自动一点不用一直按键盘  
-加载多了之后速度会变慢，也是随便写的随便用一下
+加载多了之后速度会变慢，也是随便写的随便用一下  
+23/03/15更新：发现这个适用范围其实挺广，所以改个名
 
 ## bilibili_videodetail_toggle_like.js
 之前不知为什么我B站旧版播放页点不了赞，似乎其他人没这问题  
