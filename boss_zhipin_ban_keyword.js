@@ -11,7 +11,7 @@
   'use strict';
 
   // 要屏蔽的标签关键词
-  let banKwsList = ['不接受居家办公'];
+  let banKwsList = [''];
 
   let observerEle = document.querySelector('.search-job-result');
   let timer = null;
