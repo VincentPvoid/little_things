@@ -81,3 +81,8 @@ tumblr去除右侧推荐部分
 ## boss_zhipin_ban_keyword.js
 BOSS直聘屏蔽指定关键词职位  
 某些否定关键词污染搜索所以随便写个简单脚本去除一下
+
+## weibo_super_ban_users.js  
+微博超话屏蔽特定id用户  
+屏蔽只需要UID  
+随便临时凑合用，所以直接使用计时器循环清除
