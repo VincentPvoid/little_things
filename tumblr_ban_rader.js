@@ -16,7 +16,7 @@
     console.log(divs, 'ddddddddddd')
     if (divs.length > 1) {
       // divs[1].style.display = "none";
-      divs[1].parentElement.removeChild(divs[1]);
+      divs[divs.length - 1].parentElement.removeChild(divs[divs.length - 1]);
       clearInterval(timer)
     }
   }, 1000);
