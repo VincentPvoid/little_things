@@ -1,7 +1,7 @@
 // ==UserScript==
 // @name         B站播放页屏蔽推荐视频
 // @namespace    https://github.com/VincentPvoid
-// @version      0.1
+// @version      0.2
 // @description  B站播放页屏蔽推荐视频
 // @author       You
 // @match        https://www.bilibili.com/video/*
@@ -14,7 +14,9 @@
 
   let banKeywordsList = ['需要屏蔽的关键词']
 
-  let as = document.querySelectorAll('#reco_list .video-page-card .up a')
+  // 屏蔽指定用户
+  // let as = document.querySelectorAll('#reco_list .video-page-card .up a')
+  let as = document.querySelectorAll('.rec-list .upname a')
   for (let i = 0; i < as.length; i++) {
     let tar = null;
     banList.forEach(item => {
@@ -58,26 +60,32 @@
   // }, 300);
 
 
-  let titleAs = document.querySelectorAll('#reco_list .video-page-card .info>a')
+  // 屏蔽视频标题关键词（不区分大小写）
+  // let titleAs = document.querySelectorAll('#reco_list .video-page-card .info>a')
+  let titleEles = document.querySelectorAll('.rec-list .card-box .info p')
   let temp = null;
-  titleAs = [].slice.call(titleAs)
+  titleEles = [].slice.call(titleEles)
   if (banKeywordsList.length) {
     let tarArr = [];
     let tempSpan = null;
     let tar = null;
-    for (let i = 0; i < titleAs.length; i++) {
+    for (let i = 0; i < titleEles.length; i++) {
       tar = banKeywordsList.find(item => {
-        tempSpan = titleAs[i].querySelector('span');
-        if (tempSpan && tempSpan.title && tempSpan.title.toLowerCase().includes(item)) {
+        // tempSpan = titleEles[i].querySelector('span');
+        // if (tempSpan && tempSpan.title && tempSpan.title.toLowerCase().includes(item)) {
+        //   return true;
+        // }
+        tempSpan = titleEles[i];
+        if (tempSpan.title && tempSpan.title.toLowerCase().includes(item)) {
           return true;
         }
       })
       if (tar) {
-        tarArr.push(titleAs[i])
+        tarArr.push(titleEles[i])
       }
     }
     tarArr.forEach(item => {
-      temp = item.parentElement.parentElement.parentElement;
+      temp = item.parentElement.parentElement.parentElement.parentElement;
       temp.style.display = 'none';
       // item.parentElement.parentElement.parentElement.parentElement.removeChild(temp);
     })
@@ -114,14 +122,15 @@
             //   loadObserver.disconnect();
             //   //过滤操作
             // }
+
             // 过滤up
-            let tar = addedNodes[0].querySelector('.up a');
+            let tar = addedNodes[0].querySelector('.upname a');
             if (tar) {
               handleFilter(tar)
             }
             // 过滤标题关键词
-            tar = addedNodes[0].querySelector('.info>a');
-            if(tar){
+            tar = addedNodes[0].querySelector('.info p');
+            if (tar) {
               handleKwFilter(tar)
             }
           }
@@ -149,14 +158,15 @@
       }
     })
   }
-  
+
   // 元素增加时进行标题关键词过滤
   function handleKwFilter(eleA) {
-    let tempSpan = eleA.querySelector('span')
+    // let tempSpan = eleA.querySelector('span')
+    let tempSpan = eleA;
     banKeywordsList.forEach(item => {
       let tar = null;
       if (tempSpan && tempSpan.title && tempSpan.title.toLowerCase().includes(item)) {
-        tar = eleA.parentElement.parentElement.parentElement;
+        tar = eleA.parentElement.parentElement.parentElement.parentElement;
         tar.style.display = 'none';
       }
     })
