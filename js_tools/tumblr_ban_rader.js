@@ -11,7 +11,8 @@
 (function () {
   'use strict';
   let timer = setInterval(() => {
-    let divs = document.getElementsByClassName('FZkjV');
+    // let divs = document.getElementsByClassName('FZkjV');
+    let divs = document.querySelectorAll('aside>.FZkjV');
     divs = [].slice.call(divs);
     console.log(divs, 'ddddddddddd')
     if (divs.length > 1) {
