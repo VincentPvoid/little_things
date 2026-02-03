@@ -26,10 +26,11 @@
   // 重写fetch
   window.fetch = async function (...args) {
     const response = await originalFetch.apply(this, args);
+    const clonedResponse = response.clone(); // 克隆响应以避免冲突
 
     // 检查目标URL（按需修改）
-    if (args[0].includes('/ajax/search/')) {
-      const clonedResponse = response.clone(); // 克隆响应以避免冲突
+    // 当目标参数为string类型的时候才进行判断；如果是其他类型可能会出错，进而影响返回结果
+    if (typeof(args[0]) === 'string' && args[0].includes('/ajax/search/')) {
       const data = await clonedResponse.json();
 
 
