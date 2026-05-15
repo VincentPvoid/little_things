@@ -85,5 +85,15 @@ pixiv过滤指定tag
 简单使用所以没有界面  
 - 2026-02-03 修复当fetch参数不是字符串时，使用args[0].includes()方法可能会报错，导致返回结果受影响的bug  
 
-
+## save_img_as_other_type.js
+网页图片另存为png/jpg格式，主要用于webp文件另存为普通图片格式（png/jpg)  
+因为不想所有图片都显示按钮，所以只在url包含有对应字段的地方才会显示（一般是在查看原图时）  
+算是顺带熟悉下canvas的一些简单用法  
+动图转gif似乎无法简单进行处理，所以只能转为常用的png/jpg格式  
+  
+测试时因为有些网站设置了 `Content-Security-Policy` 导致脚本无法运行，报错  
+```
+Blocked script execution in 'xxx' because the document's frame is sandboxed and the 'allow-scripts' permission is not set.
+```
+需要配合 `Header Editor` 插件移除响应头（把`Content-Security-Policy`置为空），才能正常注入脚本  
 
